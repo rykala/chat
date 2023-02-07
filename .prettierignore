@@ -1,0 +1,6 @@
+# Ignore artifacts:
+public
+dist
+build
+build_storybook
+generated

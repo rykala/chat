@@ -1,0 +1,4 @@
+extend enum MessageStatus {
+    SENDING
+    ERROR
+}

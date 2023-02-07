@@ -1,0 +1,8 @@
+{
+  "extends": "tsconfig/express.json",
+  "compilerOptions": {
+    "rootDirs": ["src"],
+    "outDir": "dist",
+    "types": ["node"],
+  }
+}

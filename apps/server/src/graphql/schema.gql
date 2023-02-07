@@ -1,0 +1,118 @@
+scalar DateTime
+
+type Query {
+  authCheck: Session
+  viewer: Viewer
+  conversation(conversationId: ID!): Conversation
+  user(id: ID!): User
+}
+
+type Session {
+  userId: String!
+}
+
+type Mutation {
+  login(email: String!, password: String!): LoginResult
+  register(email: String!, password: String!): RegisterResult
+  logout: Boolean
+  sendMessage(conversationId: ID!, message: String!): Message
+  startConversation(message: String!, recipientId: ID!): Conversation
+}
+
+type Subscription {
+  onMessageCreated: Message!
+  onConversationCreated: ConversationCreatedResponse!
+}
+
+interface Problem {
+  title: String!
+  invalidInputs: [InvalidInput!]
+}
+
+union LoginResult = LoginSuccess | LoginProblem
+
+type LoginSuccess {
+  session: Session!
+}
+
+type LoginProblem implements Problem {
+  title: String!
+  invalidInputs: [InvalidInput!]
+}
+
+type InvalidInput {
+  field: String!
+  message: String!
+}
+
+union RegisterResult = RegisterSuccess | RegisterProblem
+
+type RegisterSuccess {
+  id: ID!
+  email: String!
+}
+
+type RegisterProblem implements Problem {
+  title: String!
+  invalidInputs: [InvalidInput!]
+}
+
+type ConversationCreatedResponse {
+  conversation: Conversation!
+  startedBy: String!
+}
+
+type Viewer {
+  user: User!
+  conversations(offset: Int!, limit: Int!): ConversationsResponse!
+  contacts(search: String, offset: Int!, limit: Int!): ContactsResponse!
+}
+
+type ConversationsResponse {
+  items: [Conversation!]!
+  hasMore: Boolean!
+}
+
+type ContactsResponse {
+  items: [Contact!]!
+  hasMore: Boolean!
+}
+
+type User {
+  id: ID!
+  email: String!
+  avatarUrl: String
+}
+
+type Contact {
+  user: User!
+  conversationId: ID
+}
+
+type Message {
+  id: ID!
+  body: String!
+  timestamp: DateTime!
+  status: MessageStatus!
+  conversationId: String!
+  sender: User!
+}
+
+enum MessageStatus {
+  SENT
+  DELIVERED
+  READ
+}
+
+type Conversation {
+  id: ID!
+  participants: [User!]!
+  messages(offset: Int!, limit: Int!): MessagesResponse!
+}
+
+type MessagesResponse {
+  items: [Message!]!
+  hasMore: Boolean!
+}
+
+

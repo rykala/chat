@@ -1,0 +1,34 @@
+{
+  "name": "chat-app",
+  "version": "1.0.0",
+  "description": "Messenger clone",
+  "author": "Krystof Rykala",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "deploy": "turbo run deploy",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "codegen": "gql-gen --config codegen.yml",
+    "codegen:watch": "gql-gen --config codegen.yml --watch"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^3.0.0",
+    "@graphql-codegen/client-preset": "^2.0.0",
+    "@graphql-codegen/typescript": "^3.0.0",
+    "@graphql-codegen/typescript-resolvers": "^3.0.0",
+    "prettier": "^2.8.3",
+    "turbo": "^1.7.2",
+    "utility-types": "^3.10.0"
+  },
+  "engines": {
+    "node": ">=19.6.0"
+  },
+  "packageManager": "pnpm@7.14.0"
+}

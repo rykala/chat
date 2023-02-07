@@ -1,0 +1,22 @@
+{
+  "name": "database",
+  "main": "index.ts",
+  "types": "index.ts",
+  "scripts": {
+    "generate": "prisma generate",
+    "push": "prisma db push --skip-generate",
+    "reset": "prisma migrate reset",
+    "seed": "prisma seed"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.9.0"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "argon2": "^0.30.3",
+    "prisma": "^4.9.0"
+  }
+}
