@@ -1,7 +1,7 @@
 import { NetworkStatus, useQuery } from "@apollo/client";
 import { isNonEmptyArray } from "@apollo/client/utilities";
 import { isNonNullObject } from "@apollo/client/utilities/common/objects";
-import { RefObject, UIEventHandler, useState } from "react";
+import { RefObject, UIEventHandler } from "react";
 import { useParams } from "react-router-dom";
 import { useSession } from "../../Auth";
 import { graphql } from "../../generated/gql";

@@ -6,7 +6,9 @@
   "dependencies": {
     "eslint-config-turbo": "^0.0.7",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.2.1"
+    "eslint-plugin-prettier": "^4.2.1",
+    "@typescript-eslint/parser": "^5.54.1",
+    "@typescript-eslint/eslint-plugin": "^5.54.1"
   },
   "publishConfig": {
     "access": "public"

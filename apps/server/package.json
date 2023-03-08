@@ -7,7 +7,15 @@
   "scripts": {
     "start": "tsx src/server.ts",
     "dev": "tsx --watch src/server.ts",
-    "build": "tsc"
+    "build": "tsc && pnpm run postbuild",
+    "postbuild": "cp ./src/graphql/schema.gql ./dist/graphql",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push --skip-generate",
+    "db:reset": "prisma migrate reset",
+    "db:seed": "prisma db seed"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@apollo/server": "^4.3.1",
@@ -17,7 +25,6 @@
     "cookie": "^0.5.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
-    "database": "workspace:*",
     "express": "^4.18.2",
     "graphql": "^16.6.0",
     "graphql-middleware": "^6.1.33",
@@ -26,10 +33,11 @@
     "graphql-subscriptions": "^2.0.0",
     "graphql-ws": "^5.11.2",
     "lodash": "^4.17.21",
-    "nanoid": "^4.0.1",
+    "nanoid": "^3.3.4",
     "reflect-metadata": "^0.1.13",
     "ws": "^8.12.0",
-    "zod": "^3.20.6"
+    "zod": "^3.20.6",
+    "@prisma/client": "^4.11.0"
   },
   "devDependencies": {
     "@types/cookie": "^0.5.1",
@@ -42,7 +50,9 @@
     "dotenv": "^16.0.3",
     "eslint-config-custom-server": "workspace:*",
     "tsconfig": "workspace:*",
-    "typescript": "^4.9.5"
+    "typescript": "^4.9.5",
+    "@faker-js/faker": "^7.6.0",
+    "prisma": "^4.11.0"
   },
   "description": ""
 }

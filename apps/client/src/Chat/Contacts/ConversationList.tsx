@@ -1,10 +1,8 @@
 import { useQuery } from "@apollo/client";
 import { Flex, List, ListItem } from "@chakra-ui/react";
-import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getConversationName, sortByLastMessageTimestamp } from "../../common/utils";
 import { graphql } from "../../generated/gql";
-import { MessageCreatedSubscription } from "../useMessageSubscription";
 import { ContactItem, ContactItemSkeleton } from "./ContactItem";
 
 export const ViewerConversationsQuery = graphql(/* GraphQL */ `
@@ -32,19 +30,7 @@ export const ViewerConversationsQuery = graphql(/* GraphQL */ `
 
 export const ConversationList = () => {
   const { conversationId } = useParams();
-  const { data, loading, subscribeToMore } = useQuery(ViewerConversationsQuery);
-
-  useEffect(() => {
-    subscribeToMore({
-      document: MessageCreatedSubscription,
-      updateQuery: (prev, { subscriptionData }) => {
-        console.log("PREV", prev);
-        console.log("new", subscriptionData);
-        return prev;
-      },
-    });
-  }, []);
-
+  const { data, loading } = useQuery(ViewerConversationsQuery);
   const conversations = data?.viewer ? [...data.viewer.conversations.items].sort(sortByLastMessageTimestamp) : [];
 
   if (loading) {

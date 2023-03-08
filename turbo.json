@@ -1,36 +1,30 @@
 {
   "$schema": "https://turborepo.org/schema.json",
   "pipeline": {
-    "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "outputs": [
-        "dist/**"
-      ]
-    },
-    "lint": {
-      "outputs": [],
-      "cache": false
-    },
-    "dev": {
-      "cache": false
-    },
-    "test": {
-      "outputs": []
-    },
-    "deploy": {
-      "cache": false
-    },
     "db:generate": {
-      "cache": false
+      "inputs": ["prisma/schema.prisma"]
     },
     "db:push": {
       "cache": false
+    },
+    "lint": {
+      "cache": false
+    },
+    "dev": {
+      "dependsOn": ["db:generate"],
+      "persistent": true,
+      "cache": false
+    },
+    "build": {
+      "dependsOn": ["db:generate", "^build"],
+      "inputs": ["src/**/*.tsx", "src/**/*.ts"],
+      "outputs": ["dist/**"]
     }
   },
+  "globalDependencies": [
+    "**/.env.*local"
+  ],
   "globalEnv": [
-    "NODE_ENV",
     "PORT"
   ]
 }

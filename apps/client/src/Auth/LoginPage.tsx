@@ -109,7 +109,6 @@ export const LoginPage = () => {
               />
               {errors.password && <FormErrorMessage>{errors.password.message as string}</FormErrorMessage>}
             </FormControl>
-
             <Button type="submit" colorScheme={"purple"} variant={"solid"} mt={4}>
               Log In
             </Button>

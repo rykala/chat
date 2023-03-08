@@ -1,9 +1,9 @@
 {
   "name": "chat-app",
   "version": "1.0.0",
-  "description": "Messenger clone",
   "author": "Krystof Rykala",
   "private": true,
+  "packageManager": "pnpm@7.14.0",
   "workspaces": [
     "apps/*",
     "packages/*"
@@ -29,6 +29,5 @@
   },
   "engines": {
     "node": ">=19.6.0"
-  },
-  "packageManager": "pnpm@7.14.0"
+  }
 }

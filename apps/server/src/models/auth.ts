@@ -33,11 +33,17 @@ export const generateAuthModel = ({
     const { email, password } = args;
     const user = await db.user.findUnique({ where: { email } });
     if (!user) {
-      return { title: "Invalid email or password" };
+      return {
+        title: "Invalid email or password",
+        invalidInputs: [{ field: "password", message: "Invalid email or password" }],
+      };
     }
-    const isValid = verify(user.password, password);
-    if (!isValid) {
-      return { title: "Invalid email or password" };
+    const isPasswordValid = await verify(user.password, password);
+    if (!isPasswordValid) {
+      return {
+        title: "Invalid email or password",
+        invalidInputs: [{ field: "password", message: "Invalid email or password" }],
+      };
     }
 
     const sessionId = nanoid();

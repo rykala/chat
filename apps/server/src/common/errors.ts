@@ -1,10 +1,14 @@
+import { ApolloServerErrorCode } from "@apollo/server/errors";
 import { GraphQLError } from "graphql";
 
-export const AuthenticationError = () => {
-  const ERROR_MESSAGE = "*** you must be logged in ***";
-  return new GraphQLError(ERROR_MESSAGE, { extensions: { code: "UNAUTHENTICATED" } });
-};
+export class UnauthorizedGraphQLError extends GraphQLError {
+  constructor() {
+    super("Unauthorized access", { extensions: { code: "UNAUTHORIZED" } });
+  }
+}
 
-export const ForbiddenError = (message: GraphQLError["message"]) => {
-  return new GraphQLError(message, { extensions: { code: "FORBIDDEN" } });
-};
+export class InternalServerGraphQLError extends GraphQLError {
+  constructor() {
+    super("Internal server error", { extensions: { code: ApolloServerErrorCode.INTERNAL_SERVER_ERROR } });
+  }
+}
