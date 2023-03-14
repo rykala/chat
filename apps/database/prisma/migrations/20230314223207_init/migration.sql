@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "UserStatus" AS ENUM ('ONLINE', 'OFFLINE');
+CREATE TYPE "MessageStatus" AS ENUM ('SENT', 'DELIVERED', 'READ');
 
 -- CreateTable
 CREATE TABLE "User" (
@@ -7,8 +7,8 @@ CREATE TABLE "User" (
     "email" VARCHAR(50) NOT NULL,
     "password" TEXT NOT NULL,
     "sessionId" TEXT,
-    "status" "UserStatus",
     "lastUpdated" TIMESTAMP(3) NOT NULL,
+    "avatarUrl" TEXT,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -16,6 +16,7 @@ CREATE TABLE "User" (
 -- CreateTable
 CREATE TABLE "Conversation" (
     "id" TEXT NOT NULL,
+    "lastUpdated" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Conversation_pkey" PRIMARY KEY ("id")
 );
@@ -24,10 +25,10 @@ CREATE TABLE "Conversation" (
 CREATE TABLE "Message" (
     "id" TEXT NOT NULL,
     "timestamp" TIMESTAMP(3) NOT NULL,
-    "message" TEXT NOT NULL,
+    "body" TEXT NOT NULL,
     "senderId" TEXT NOT NULL,
     "conversationId" TEXT NOT NULL,
-    "read" BOOLEAN NOT NULL DEFAULT false,
+    "status" "MessageStatus" NOT NULL DEFAULT 'SENT',
 
     CONSTRAINT "Message_pkey" PRIMARY KEY ("id")
 );

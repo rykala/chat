@@ -1,4 +1,4 @@
-import type { Message } from "@prisma/client";
+import type { Message } from "database";
 import { DatabaseClient } from "../types";
 
 export const generateMessageModel = ({ db }: { db: DatabaseClient }) => ({

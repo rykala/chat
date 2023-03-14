@@ -30,16 +30,27 @@ services:
     volumes:
       - db:/var/lib/postgresql/data
   database-migrate:
-    container_name: database-migration
+    container_name: database-migrate
     build:
       context: .
-      dockerfile: ./apps/server/db.dockerfile
+      dockerfile: ./apps/database/migrate.dockerfile
     environment:
       - DATABASE_URL=postgres://admin:admin@database:5432/postgres?typeDefs=public
     volumes:
       - db:/var/lib/postgresql/data
     depends_on:
       - database
+  database-seed:
+    container_name: database-seed
+    build:
+      context: .
+      dockerfile: ./apps/database/seed.dockerfile
+    environment:
+      - DATABASE_URL=postgres://admin:admin@database:5432/postgres?typeDefs=public
+    volumes:
+      - db:/var/lib/postgresql/data
+    depends_on:
+      - database-migrate
 volumes:
   db:
     external: true

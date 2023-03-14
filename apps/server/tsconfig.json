@@ -1,9 +1,6 @@
 {
   "extends": "tsconfig/express.json",
-  "exclude": [
-    "node_modules",
-    "prisma"
-  ],
+  "exclude": ["node_modules"],
   "compilerOptions": {
     "rootDirs": [
       "src"

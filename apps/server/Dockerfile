@@ -31,9 +31,10 @@ FROM image AS runner
 RUN npm -g install pnpm@7.14.0
 WORKDIR /app
 
-COPY --from=installer /app/apps/server/node_modules ./apps/server/node_modules
-COPY --from=installer /app/node_modules ./node_modules
-COPY --from=installer /app/apps/server/dist ./apps/server
+COPY --from=installer /app/apps/server/node_modules/ ./apps/server/node_modules/
+COPY --from=installer /app/node_modules/ ./node_modules/
+COPY --from=installer /app/apps/server/dist/ ./apps/server/
+COPY --from=installer /app/apps/database/dist/index.js ./apps/database/
 
 # Don't run production as root
 RUN addgroup --system --gid 1001 nodejs

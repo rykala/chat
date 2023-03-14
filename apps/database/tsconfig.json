@@ -1,0 +1,8 @@
+{
+  "extends": "tsconfig/express.json",
+  "exclude": ["node_modules", "prisma"],
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "dist",
+  }
+}

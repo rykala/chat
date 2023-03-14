@@ -2,7 +2,7 @@ import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
 import { makeExecutableSchema } from "@graphql-tools/schema";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "database";
 import { parse } from "cookie";
 import cookieParser from "cookie-parser";
 import cors from "cors";

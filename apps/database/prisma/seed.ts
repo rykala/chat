@@ -43,7 +43,7 @@ async function main() {
   }
 
   const users = await prisma.user.findMany({ where: { NOT: { id: user.id } } });
-  users.slice(0, 5).forEach(async ({ id: buddyId }) => {
+  for (const { id: buddyId } of users.slice(0, 5)) {
     const conversation = await prisma.conversation.create({
       data: {
         participants: {
@@ -65,14 +65,15 @@ async function main() {
         },
       });
     }
-  });
+  }
 }
 
 main()
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  })
-  .finally(async () => {
+  .then(async () => {
     await prisma.$disconnect();
+  })
+  .catch(async (e) => {
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
   });

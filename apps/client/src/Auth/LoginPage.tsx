@@ -42,7 +42,7 @@ export const LoginPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [login, { data }] = useMutation(LOGIN_MUTATION, {
+  const [login, { data, loading }] = useMutation(LOGIN_MUTATION, {
     onCompleted: ({ login }) => {
       if (login?.__typename === "LoginSuccess") {
         navigate(location.state?.from ?? routes.CHAT);
@@ -109,7 +109,7 @@ export const LoginPage = () => {
               />
               {errors.password && <FormErrorMessage>{errors.password.message as string}</FormErrorMessage>}
             </FormControl>
-            <Button type="submit" colorScheme={"purple"} variant={"solid"} mt={4}>
+            <Button type="submit" colorScheme={"purple"} variant={"solid"} mt={4} isLoading={loading}>
               Log In
             </Button>
           </Flex>
