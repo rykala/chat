@@ -9,14 +9,15 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "turbo run build",
+    "build": "pnpm codegen && turbo run build",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
     "test": "turbo run test",
     "deploy": "turbo run deploy",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "codegen": "gql-gen --config codegen.yml",
-    "codegen:watch": "gql-gen --config codegen.yml --watch"
+    "codegen": "pnpm codegen:client & pnpm codegen:server",
+    "codegen:client": "gql-gen --config codegen.client.yml",
+    "codegen:server": "gql-gen --config codegen.server.yml"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^3.0.0",

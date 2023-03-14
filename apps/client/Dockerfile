@@ -20,9 +20,11 @@ COPY --from=builder /app/out/json/ .
 RUN pnpm install -r --offline
 
 COPY --from=builder /app/out/full/ .
-RUN pnpm turbo run build --filter=client...
+COPY /codegen.client.yml .
+COPY /apps/server/src/graphql/schema.gql ./apps/server/src/graphql/schema.gql
+RUN pnpm codegen:client && pnpm turbo run build --filter=client...
 
-FROM nginx AS runner
+FROM nginx:1.23-alpine AS runner
 COPY --from=installer /app/apps/client/dist /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx","-g","daemon off;"]

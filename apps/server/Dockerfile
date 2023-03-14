@@ -23,8 +23,9 @@ COPY --from=builder /app/out/json/ .
 RUN pnpm install -r --offline
 
 # Build the project
+COPY /codegen.server.yml .
 COPY --from=builder /app/out/full/ .
-RUN pnpm turbo build --filter=server...
+RUN pnpm codegen:server && pnpm turbo build --filter=server...
 
 FROM image AS runner
 RUN npm -g install pnpm@7.14.0

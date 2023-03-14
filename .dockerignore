@@ -4,3 +4,5 @@
 .git
 npm-debug.log
 .env
+**/generated-types*
+**/generated/

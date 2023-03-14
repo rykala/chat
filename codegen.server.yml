@@ -1,6 +1,5 @@
 overwrite: true
 schema: 'apps/server/src/graphql/*.{gql,graphql}'
-documents: [ 'apps/client/src/**/*.{ts,tsx}', '!apps/client/src/generated/gql/**/*' ]
 generates:
   apps/server/src/types/generated-types.ts:
     plugins:
@@ -15,10 +14,3 @@ generates:
       enumsAsConst: true
       scalars:
         DateTime: Date
-  apps/client/src/generated/gql/:
-    schema: 'apps/client/src/graphql/*.{gql,graphql}'
-    preset: client
-    plugins: [ ]
-    presetConfig:
-      fragmentMasking:
-        unmaskFunctionName: getFragmentData

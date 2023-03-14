@@ -33,7 +33,7 @@ services:
     container_name: database-migration
     build:
       context: .
-      dockerfile: ./apps/server/Dockerfile-migrate
+      dockerfile: ./apps/server/db.dockerfile
     environment:
       - DATABASE_URL=postgres://admin:admin@database:5432/postgres?typeDefs=public
     volumes:
